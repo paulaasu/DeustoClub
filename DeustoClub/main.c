@@ -109,27 +109,11 @@ Usuario registrarUsuario(){
 
 
 int main(void) {
-//	strcpy(p1.nombre,"Encanto");p1.codPelicula=0;strcpy(p1.disponibilidad,"Disponible");strcpy(p1.genero,"Fantasía");
-//	p1.codPelicula = 0; p1.precio= 10.5; p1.valoracion=9.5;
-//	imprimirPelicula(p1);
-
-	//TE MUESTRA LOS MENUS Y ESO
-	char opcion;
-	// con el dowhile al menos se ejecuta una vez lo que esta en el do
-	//do{
-		opcion = mostrarMenu();
-		switch (opcion) {
-			case '1': //si pone 1 se inicia sesion
-				inicioSesion();
-				break;
-			case '2': // se registra
-				registrarUsuario();
-				break;
-			case '3': //salir
-
-				break;
-			}
-		//}while(opcion!="q"); //esto no funciona!!!
+	Usuario u;
+	imprimirUsuario(u);
+	editarUsuario(&u, "Joseba", "5555");
+	imprimirUsuario(u);
+	printf("Igual= %i", comprobarDatos(u.contrasenia, "5655"));
 
 
 	return 0;

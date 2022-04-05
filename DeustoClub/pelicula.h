@@ -12,14 +12,16 @@ typedef struct{
 	int codPelicula;
 	char *nombre;
 	float precio;
-	char *disponibilidad;
-	//char* director; //yo lo quitaria ns
-	char genero[20];
+	int disponibilidad;
+	int genero;
 	int valoracion;
 	int minutos;
 }Pelicula;
 
 void imprimirPelicula(Pelicula p);
+void editarPelicula(Pelicula *p, int cod, char* nom, float prec, int gen, float val, int dis);
+void alquilarPelicula(Pelicula *p);
+void devolverPelicula(Pelicula *p);
 
 
 #endif /* PELICULA_H_ */
