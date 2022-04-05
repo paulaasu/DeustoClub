@@ -1,4 +1,5 @@
 #include "pelicula.h"
+#include <stdlib.h>
 #include "usuario.h"
 #include <math.h>
 #include <stdio.h>
@@ -72,40 +73,38 @@ Usuario registrarUsuario(){
 		free(formato1);
 
 
-		char *formato2 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
 		printf("Introduce contraseña:\n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
-		sscanf(str, "%s", formato2);
+		sscanf(str, "%s", formato1);
 		fflush(stdin);
-		int tamanyo2 = strlen(formato2);
+		int tamanyo2 = strlen(formato1);
 		u.contrasenia = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
-		strcpy(u.contrasenia, formato2);
-		free(formato2);
+		strcpy(u.contrasenia, formato1);
+		free(formato1);
 
-//		char *formato2 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
-//		printf("Repita la contraseña:\n");
+		printf("Repita la contraseña: \n");
 //		fflush(stdout);
-//		gets(str, MAX_LINE, stdin);
-//		sscanf(str, "%s", formato2);
+//		fgets(str, MAX_LINE, stdin);
+//		sscanf(str, "%s", formato1);
 //		fflush(stdin);
-//		int tamanyo2 = strlen(formato2);
-//		char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
-//		strcpy(contraseniaRepe, formato2);
+//		int tamanyo3 = strlen(formato1);
+//		char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo3+1)));
+//		strcpy(contraseniaRepe, formato1);
 //		while(u.contrasenia!=contraseniaRepe){
-//			//aki deberia repetirtelo hasta poner la contraseña bien?
+//			//aqui deberia repetirtelo hasta poner la contraseña bien?
 //			printf("¡ERROR! la contraseña es incorrecta, vuelve a introducirla");
 //			printf("Repita la contraseña:\n");
 //			fflush(stdout);
-//			gets(str, MAX_LINE, stdin);
-//			sscanf(str, "%s", formato2);
+//			fgets(str, MAX_LINE, stdin);
+//			sscanf(str, "%s", formato1);
 //			fflush(stdin);
-//			int tamanyo2 = strlen(formato2);
-//			char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
-//			strcpy(contraseniaRepe, formato2);
+//			int tamanyo4 = strlen(formato1);
+//			char* contraseniaRepe2 = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
+//			strcpy(contraseniaRepe2, formato1);
+//			free(formato1);
+//
 //		}
-
-//		free(formato2);
 
 		return u;
 }
@@ -122,13 +121,13 @@ int main(void) {
 	//do{
 		opcion = mostrarMenu();
 		switch (opcion) {
-			case '1': //si pone 1
+			case '1': //si pone 1 se inicia sesion
 				inicioSesion();
 				break;
-			case '2':
-
+			case '2': // se registra
+				registrarUsuario();
 				break;
-			case '3':
+			case '3': //salir
 
 				break;
 			}

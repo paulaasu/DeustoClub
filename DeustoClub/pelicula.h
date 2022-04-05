@@ -16,7 +16,7 @@ typedef struct{
 	//char* director; //yo lo quitaria ns
 	char genero[20];
 	int valoracion;
-	//duracion??
+	int minutos;
 }Pelicula;
 
 void imprimirPelicula(Pelicula p);
