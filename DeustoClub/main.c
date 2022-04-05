@@ -3,6 +3,7 @@
 #include "usuario.h"
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_LINE 10
 
@@ -66,7 +67,6 @@ Usuario registrarUsuario(){
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%s", formato1);
-		fflush(stdin);
 		int tamanyo = strlen(formato1);
 		u.nombre = (char*)(malloc(sizeof(char*)*(tamanyo+1)));
 		strcpy(u.nombre, formato1);
@@ -77,20 +77,18 @@ Usuario registrarUsuario(){
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%s", formato1);
-		fflush(stdin);
 		int tamanyo2 = strlen(formato1);
 		u.contrasenia = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
 		strcpy(u.contrasenia, formato1);
 		free(formato1);
 
 		printf("Repita la contraseña: \n");
-//		fflush(stdout);
-//		fgets(str, MAX_LINE, stdin);
-//		sscanf(str, "%s", formato1);
-//		fflush(stdin);
-//		int tamanyo3 = strlen(formato1);
-//		char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo3+1)));
-//		strcpy(contraseniaRepe, formato1);
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%s", formato1);
+		int tamanyo3 = strlen(formato1);
+		char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo3+1)));
+		strcpy(contraseniaRepe, formato1);
 //		while(u.contrasenia!=contraseniaRepe){
 //			//aqui deberia repetirtelo hasta poner la contraseña bien?
 //			printf("¡ERROR! la contraseña es incorrecta, vuelve a introducirla");
@@ -132,7 +130,6 @@ int main(void) {
 				break;
 			}
 		//}while(opcion!="q"); //esto no funciona!!!
-
 
 
 	return 0;
