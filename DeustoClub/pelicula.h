@@ -10,9 +10,9 @@
 
 typedef struct{
 	int codPelicula;
-	char nombre[15];
+	char *nombre;
 	float precio;
-	char disponibilidad[15];
+	char *disponibilidad;
 	//char* director; //yo lo quitaria ns
 	char genero[20];
 	int valoracion;
