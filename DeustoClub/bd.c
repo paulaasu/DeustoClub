@@ -71,6 +71,39 @@ void anyadirPelicula(Pelicula p){
 	sqlite3_close(db);
 
 }
+void updatePelicula(Pelicula p){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+
+	sqlite3_open("BaseDeDatos", &db);
+	int codigo = p.codPelicula;
+	char sql2[] = "delete from pelicula where cod_p = codigo";
+	char sql1[] = "insert into pelicula(cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos) values (?, ?, ?, ?, ?, ? ,?)";
+
+	sqlite3_prepare_v2(db, sql2, strlen(sql2) + 1, &stmt, NULL);
+
+	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL);
+	sqlite3_bind_int(stmt, 1, p.codPelicula);
+	sqlite3_bind_text(stmt, 2, p.nombre, strlen(p.nombre), SQLITE_STATIC);
+	sqlite3_bind_double(stmt, 3, p.precio);
+	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la película
+	sqlite3_bind_int(stmt, 5, p.genero);
+	sqlite3_bind_int(stmt, 6, p.valoracion);
+	sqlite3_bind_int(stmt, 7, p.minutos);
+
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error en el usuario registrado!\n");
+	}else{
+		printf("Usuario correctamente registrado\n");
+	}
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+
+}
 
 void visualizarPeliculasDisp(){
 	sqlite3 *db;
@@ -79,7 +112,7 @@ void visualizarPeliculasDisp(){
 	sqlite3_open("BaseDeDatos", &db);
 	int dispo=1;
 
-	char sql2[] = "select * from pelicula where disponibilidad=?";
+	char sql2[] = "select cod_p, pelicula.nombre, precio, disponibilidad, generos.nombre, valoracion, minutos from pelicula, generos where disponibilidad=? and pelicula.cod_p=generos.cod;";
 
 	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
 	sqlite3_bind_int(stmt, 1, dispo);
