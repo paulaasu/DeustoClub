@@ -5,7 +5,7 @@
 
 
 void imprimirPelicula(Pelicula p){
-	printf("[Cod: %i, Nombre: %s, Precio: %f, Genero: %i, Valoracion: %f, Disponibilidad: %i]", p.codPelicula, p.nombre, p.precio, p.genero, p.valoracion, p.disponibilidad);
+	printf("[Cod: %i, Nombre: %s, Precio: %f, Genero: %i, Valoracion: %f, Disponibilidad: %i]\n", p.codPelicula, p.nombre, p.precio, p.genero, p.valoracion, p.disponibilidad);
 }
 
 void editarPelicula(Pelicula *p, int cod, char* nom, float prec, int gen, float val, int dis){

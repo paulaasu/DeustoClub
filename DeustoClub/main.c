@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+//#include "bd.c"
 
 #define MAX_LINE 10
 
@@ -114,6 +115,12 @@ int main(void) {
 	editarUsuario(&u, "Joseba", "5555");
 	imprimirUsuario(u);
 	printf("Igual= %i", comprobarDatos(u.contrasenia, "5655"));
+
+//	Usuario u1;
+//	u1.nombre = "Maria";
+//	u1.contrasenia= "2222";
+//	anyadirUsuario(u1);
+	visualizarPeliculasDisp();
 
 
 	return 0;

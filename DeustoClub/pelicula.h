@@ -14,7 +14,7 @@ typedef struct{
 	float precio;
 	int disponibilidad;
 	int genero;
-	int valoracion;
+	float valoracion;
 	int minutos;
 }Pelicula;
 
