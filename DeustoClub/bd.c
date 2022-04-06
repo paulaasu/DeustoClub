@@ -5,6 +5,13 @@
 #include "almacen.h"
 #include "pelicula.h"
 
+/*COSAS QUE HACER:
+1.- Reservar pelicula-> cambiar la disponibilidad de la película a 0 (UPDATE)
+2.- Devolver pelicula-> cambiar la disponibilidad de la película a 1 (UPDATE)
+3.- Filtrar película por género
+
+*/
+
 void anyadirUsuario(Usuario u){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
@@ -93,7 +100,10 @@ void visualizarPeliculasDisp(){
 
 }
 
-//hace que la disponibilidad se cambie a 0, es decir, no esté disponible
+
+
+
+//hace que la disponibilidad se cambie a 0, es decir, no esté disponible ESTÁ MAL
 //void reservarPelicula(Pelicula p){
 //	sqlite3 *db;
 //	sqlite3_stmt *stmt;
