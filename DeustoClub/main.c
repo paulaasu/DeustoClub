@@ -18,8 +18,12 @@ int main(void) {
 	imprimirUsuario(u);
 	printf("Igual= %i\n", comprobarDatos(u.contrasenia, "5655"));
 	printf("Correcta= %i\n", comprobarcontrasenya("aaa", "aaa"));
-	registrarUsuario();
+	//registrarUsuario();
 
+	Usuario J;
+	J.nombre = "Joseba";
+	J.contrasenia ="313";
+	printf("Usuario:%i\n", comprobarUsuario(J.nombre, J.contrasenia));
 
 //	Usuario u1;
 //	u1.nombre = "Maria";

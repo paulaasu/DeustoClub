@@ -132,7 +132,30 @@ void visualizarPeliculasDisp(){
 	sqlite3_close(db);
 
 }
+//comprueba si el usuario y contraseña están en la bd y si está te devuelve un 1
+int comprobarUsuario(char *u, char *c){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	sqlite3_open("BaseDeDatos", &db);
+	int usuario=0;
 
+	char sql2[] = "select * from usuario where usuario=? and contrasnya=?;";
+
+	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
+	sqlite3_bind_text(stmt, 1, u, strlen(u), SQLITE_STATIC);
+	sqlite3_bind_text(stmt, 2, c, strlen(c), SQLITE_STATIC);
+
+	result = sqlite3_step(stmt);
+	if(result == SQLITE_ROW){
+		usuario=1;
+	}
+	sqlite3_finalize(stmt);
+
+	sqlite3_close(db);
+	return usuario;
+
+}
 
 
 

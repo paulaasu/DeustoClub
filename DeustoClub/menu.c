@@ -101,21 +101,22 @@ Usuario registrarUsuario(){
 		int tamanyo3 = strlen(formato1);
 		char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo3+1)));
 		strcpy(contraseniaRepe, formato1);
-		printf("Contrasenia: %s \n", contrasenia);
-		printf("ContraseniaRepe: %s \n", contraseniaRepe);
+//		printf("Contrasenia: %s \n", contrasenia);
+//		printf("ContraseniaRepe: %s \n", contraseniaRepe);
 		int correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
-		printf("Correcta: %i", correcta);
+//		printf("Correcta: %i", correcta);
 		while(correcta != 1){
 			printf("¡ERROR! la contraseña es incorrecta, vuelve a introducirla \n");
 			printf("Repita la contraseña:\n");
 			fflush(stdout);
 			fgets(str, MAX_LINE, stdin);
 			sscanf(str, "%s", formato1);
-			int tamanyo3 = strlen(formato1);
-			char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo3+1)));
+			int tamanyo4 = strlen(formato1);
+			contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo4+1)));
 			strcpy(contraseniaRepe, formato1);
-			int correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
+			correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
 		}
+		printf("Usuario registrado correctamente!\n");
 
 
 
