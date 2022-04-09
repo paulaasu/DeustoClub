@@ -135,3 +135,23 @@ Usuario registrarUsuario(){
 
 		return u;
 }
+
+
+char menuPrincipal(){
+	printf("...........................\n");
+	printf("Bienvenido a DeustoClub!\n");
+	printf("...........................\n");
+	printf("1. Visualizar películas disponibles\n");
+	printf("2. Alquilar película\n");
+	printf("3. Devolver película\n");
+	printf("4. Filtrar película\n");
+	printf("5. Ver mis películas\n");
+	printf("3. Volver\n");
+
+	fflush(stdout);
+	char linea[MAX_LINE];
+	fgets(linea, MAX_LINE, stdin);
+	printf("%s", linea);
+	return *linea;
+
+}

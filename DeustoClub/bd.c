@@ -157,6 +157,80 @@ int comprobarUsuario(char *u, char *c){
 
 }
 
+//añade a la tabla alquilar el usuario y pelicula y el codigo alquiler
+void alqPelicula(Usuario u, Pelicula p, int codAlquiler){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+
+	sqlite3_open("BaseDeDatos", &db);
+	/* --- INSERT --- */
+	char sql1[] = "insert into alquiler(cod_alquiler, cod_pelicula, usuario) values (?, ?, ?)";
+	int gastado = 0;
+
+	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL) ;
+	sqlite3_bind_int(stmt, 1, codAlquiler);
+	sqlite3_bind_int(stmt, 2, p.codPelicula);
+	sqlite3_bind_text(stmt, 3, u.nombre, strlen(u.nombre), SQLITE_STATIC);
+
+
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error al alquilar la película!\n");
+	}else{
+		printf("Película alquilada correctamente\n");
+	}
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+
+}
+
+//devuelve un array de peliculas de todas las peliculas de la bd (NS SI ESTA BN)
+Pelicula* devolPelicula(){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	sqlite3_open("BaseDeDatos", &db);
+	int dispo=1;
+
+	////////////////////////
+	int numPelis = 0;
+	Pelicula *arrayP;
+
+	////////////////////////
+
+	char sql2[] = "select cod_p, pelicula.nombre, precio, disponibilidad, generos.nombre, valoracion, minutos from pelicula, generos where disponibilidad=? and pelicula.cod_p=generos.cod;";
+
+	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
+	sqlite3_bind_int(stmt, 1, dispo);
+
+	printf("\n");
+	//printf("Mostrando películas disponibles:\n"); //te muestra el codigo
+	do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			numPelis++;
+			Pelicula peli;
+			peli.nombre = sqlite3_column_text(stmt, 1);
+			peli.codPelicula = sqlite3_column_int(stmt, 0);
+			peli.precio = sqlite3_column_double(stmt, 2);
+			peli.genero = sqlite3_column_int(stmt, 4);
+			peli.valoracion = sqlite3_column_double(stmt, 5);
+			peli.disponibilidad = sqlite3_column_int(stmt, 3);
+			peli.minutos = sqlite3_column_int(stmt, 4);
+			arrayP = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis));
+			arrayP[numPelis-1]= peli;
+			//printf("[Cod: %s, Nombre: %s, Precio: %s, Genero: %s, Valoracion: %s, Minutos: %s]\n",sqlite3_column_text(stmt, 0) , sqlite3_column_text(stmt, 1), sqlite3_column_text(stmt, 2), sqlite3_column_text(stmt, 4), sqlite3_column_text(stmt, 5), sqlite3_column_text(stmt, 6));
+		}
+	} while (result == SQLITE_ROW);
+	return arrayP;
+	sqlite3_finalize(stmt);
+
+	sqlite3_close(db);
+
+}
 
 
 //hace que la disponibilidad se cambie a 0, es decir, no esté disponible ESTÁ MAL
