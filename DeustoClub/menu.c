@@ -19,21 +19,33 @@ int comprobarcontrasenya(char* c1, char* c2){
 	}
 	return correcto;
 }
-char mostrarMenu(){
+void mostrarMenu(){
+	char c;
 	printf("----------------------\n");
 	printf("DEUSTOCLUB\n");
 	printf("----------------------\n");
 	printf("Bienvenido a DeustoClub:\n");
-	printf("1.Iniciar sesion\n");
-	printf("2.Registrar usuario\n");
-	printf("3.Salir\n");
+	do{
+	if (c == '2') {
+		fflush(stdin);
+		registrarUsuario();
+
+
+	}
+
+	if(c != '\n'){
+		printf("1.Iniciar sesion\n");
+		printf("2.Registrar usuario\n");
+		printf("3.Salir\n");
+	}
 
 	fflush(stdout);
-	char linea[MAX_LINE];
-	fgets(linea, MAX_LINE, stdin);
-	printf("%s", linea);
-	return *linea;
+	c = getchar();
+
+	}while(c != '3' );
+	printf("ACABADO \n");
 }
+
 
 Usuario inicioSesion(){
 	printf("----------------------\n");
@@ -116,6 +128,7 @@ Usuario registrarUsuario(){
 			strcpy(contraseniaRepe, formato1);
 			correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
 		}
+
 		printf("Usuario registrado correctamente!\n");
 
 
