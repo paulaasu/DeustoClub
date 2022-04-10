@@ -19,18 +19,22 @@ int comprobarcontrasenya(char* c1, char* c2){
 	}
 	return correcto;
 }
-void mostrarMenu(){
+void mostrarMenu(Almacen a){
 	char c;
 	printf("----------------------\n");
 	printf("DEUSTOCLUB\n");
 	printf("----------------------\n");
 	printf("Bienvenido a DeustoClub:\n");
 	do{
+
+	if (c == '1') {
+		fflush(stdin);
+		inicioSesion(a);
+	}
+
 	if (c == '2') {
 		fflush(stdin);
-		registrarUsuario();
-
-
+		anyadirUsuario(registrarUsuario());
 	}
 
 	if(c != '\n'){
@@ -75,6 +79,13 @@ Usuario inicioSesion(){
 	u.contrasenia = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
 	strcpy(u.contrasenia, formato2);
 	free(formato2);
+	int comprobar = comprobarUsuario(u.nombre, u.contrasenia);
+	if(comprobar != 1){
+		printf("Usuario incorrecto \n");
+	}
+	else{
+		menuPrincipal();
+	}
 
 	return u;
 
@@ -117,6 +128,7 @@ Usuario registrarUsuario(){
 //		printf("ContraseniaRepe: %s \n", contraseniaRepe);
 		int correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
 //		printf("Correcta: %i", correcta);
+
 		while(correcta != 1){
 			printf("¡ERROR! la contraseña es incorrecta, vuelve a introducirla \n");
 			printf("Repita la contraseña:\n");
@@ -128,6 +140,9 @@ Usuario registrarUsuario(){
 			strcpy(contraseniaRepe, formato1);
 			correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
 		}
+		if (correcta == 1) {
+			u.contrasenia = contrasenia;
+		}
 
 		printf("Usuario registrado correctamente!\n");
 
@@ -137,21 +152,38 @@ Usuario registrarUsuario(){
 }
 
 
-char menuPrincipal(){
-	printf("...........................\n");
-	printf("Bienvenido a DeustoClub!\n");
-	printf("...........................\n");
-	printf("1. Visualizar películas disponibles\n");
-	printf("2. Alquilar película\n");
-	printf("3. Devolver película\n");
-	printf("4. Filtrar película\n");
-	printf("5. Ver mis películas\n");
-	printf("3. Volver\n");
+void menuPrincipal(Almacen a){
+
+	char c;
+		printf("...........................\n");
+		printf("Bienvenido a DeustoClub!\n");
+		printf("...........................\n");
+	do{
+
+	if (c == '1') {
+		fflush(stdin);
+		visualizarPeliculasDisp();
+	}
+
+	if (c == '2') {
+//		fflush(stdin);
+//		anyadirUsuario(registrarUsuario());
+	}
+
+	if(c != '\n'){
+		printf("1. Visualizar películas disponibles\n");
+		printf("2. Alquilar película\n");
+		printf("3. Devolver película\n");
+		printf("4. Filtrar película\n");
+		printf("5. Volver\n");
+	}
 
 	fflush(stdout);
-	char linea[MAX_LINE];
-	fgets(linea, MAX_LINE, stdin);
-	printf("%s", linea);
-	return *linea;
+	c = getchar();
+
+	}while(c != '5' );
+	printf("ACABADO \n");
+
+
 
 }
