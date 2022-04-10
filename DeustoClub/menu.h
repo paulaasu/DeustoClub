@@ -10,7 +10,7 @@
 #include"almacen.h"
 
 void mostrarMenu(Almacen a);
-Usuario inicioSesion();
+Usuario inicioSesion(Almacen a);
 Usuario registrarUsuario();
 int comprobarcontrasenya(char* c1, char* c2);
 

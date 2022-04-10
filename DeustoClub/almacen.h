@@ -12,11 +12,11 @@ typedef struct{
 	int numPeliculas;
 	Pelicula *ArrayP;
 }Almacen;
-crearAlmacen(Almacen a, Pelicula *ap, int tamanyo);
-listarPeliculas(Almacen a);
-filtrarDisponibles(Almacen a);
-filtrarGenero(Almacen a, int genero);
-filtrarPrecioMax(Almacen a, int precio);
+void crearAlmacen(Almacen *a, Pelicula *ap, int tamanyo);
+void listarPeliculas(Almacen a);
+void filtrarDisponibles(Almacen a);
+void filtrarGenero(Almacen a, int genero);
+void filtrarPrecioMax(Almacen a, int precio);
 
 
 #endif /* ALMACEN_H_ */

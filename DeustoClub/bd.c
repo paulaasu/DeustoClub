@@ -5,6 +5,7 @@
 #include "usuario.h"
 #include "almacen.h"
 #include "pelicula.h"
+#include "bd.h"
 
 /*COSAS QUE HACER:
 1.- Reservar pelicula-> cambiar la disponibilidad de la película a 0 (UPDATE)
@@ -193,17 +194,17 @@ int numPelis(){
 		sqlite3_stmt *stmt;
 		int result;
 		sqlite3_open("BaseDeDatos", &db);
-		int dispo=1;
+//		int dispo=1;
 
 		////////////////////////
 		int numPelis = 0;
 
 		////////////////////////
 
-		char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula where disponibilidad=?;";
+		char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula;";
 
 		sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
-		sqlite3_bind_int(stmt, 1, dispo);
+//		sqlite3_bind_int(stmt, 1, dispo);
 
 		printf("\n");
 		do {
@@ -225,7 +226,7 @@ Pelicula* devolPelicula(int numPelis){
 	sqlite3_stmt *stmt;
 	int result;
 	sqlite3_open("BaseDeDatos", &db);
-	int dispo=1;
+//	int dispo=1;
 
 	////////////////////////
 	int numPelis2=0;
@@ -234,10 +235,10 @@ Pelicula* devolPelicula(int numPelis){
 
 	////////////////////////
 
-	char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula where disponibilidad=?;";
+	char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula;";
 
 	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
-	sqlite3_bind_int(stmt, 1, dispo);
+//	sqlite3_bind_int(stmt, 1, dispo);
 
 	printf("\n");
 	//printf("Mostrando películas disponibles:\n"); //te muestra el codigo

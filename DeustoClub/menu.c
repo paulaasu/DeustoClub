@@ -20,6 +20,7 @@ int comprobarcontrasenya(char* c1, char* c2){
 	return correcto;
 }
 void mostrarMenu(Almacen a){
+	printf("Numpel: %i", a.numPeliculas);
 	char c;
 	printf("----------------------\n");
 	printf("DEUSTOCLUB\n");
@@ -51,7 +52,7 @@ void mostrarMenu(Almacen a){
 }
 
 
-Usuario inicioSesion(){
+Usuario inicioSesion(Almacen a){
 	printf("----------------------\n");
 	printf("INICIO SESION\n");
 	printf("----------------------\n");
@@ -84,7 +85,7 @@ Usuario inicioSesion(){
 		printf("Usuario incorrecto \n");
 	}
 	else{
-		menuPrincipal();
+		menuPrincipal(a);
 	}
 
 	return u;
@@ -153,7 +154,7 @@ Usuario registrarUsuario(){
 
 
 void menuPrincipal(Almacen a){
-
+	printf("Numpel: %i", a.numPeliculas);
 	char c;
 		printf("...........................\n");
 		printf("Bienvenido a DeustoClub!\n");
@@ -162,12 +163,16 @@ void menuPrincipal(Almacen a){
 
 	if (c == '1') {
 		fflush(stdin);
-		visualizarPeliculasDisp();
+		filtrarDisponibles(a);
 	}
 
 	if (c == '2') {
 //		fflush(stdin);
 //		anyadirUsuario(registrarUsuario());
+	}
+	if (c == '4') {
+		fflush(stdin);
+
 	}
 
 	if(c != '\n'){
