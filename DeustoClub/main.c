@@ -13,7 +13,13 @@
 
 int main(void) {
 
-	mostrarMenu();
+//	mostrarMenu();
+	Pelicula *arrayPeliDisp = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis()));
+	arrayPeliDisp = devolPelicula(numPelis());
+
+	for(int i=0; i<numPelis(); i++){
+			imprimirPelicula(arrayPeliDisp[i]);
+		}
 
 //	Usuario u;
 //	imprimirUsuario(u);

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "sqlite3.h"
 #include <string.h>
 #include "usuario.h"
@@ -122,7 +123,7 @@ void visualizarPeliculasDisp(){
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
-			printf("[Cod: %s, Nombre: %s, Precio: %s, Genero: %s, Valoracion: %s, Minutos: %s]\n",sqlite3_column_text(stmt, 0) , sqlite3_column_text(stmt, 1), sqlite3_column_text(stmt, 2), sqlite3_column_text(stmt, 4), sqlite3_column_text(stmt, 5), sqlite3_column_text(stmt, 6));
+			printf("[Cod: %s, Nombre: %i, Precio: %s, Genero: %s, Valoracion: %s, Minutos: %s]\n",sqlite3_column_text(stmt, 0) , sqlite3_column_text(stmt, 1), sqlite3_column_text(stmt, 2), sqlite3_column_text(stmt, 4), sqlite3_column_text(stmt, 5), sqlite3_column_text(stmt, 6));
 		}
 	} while (result == SQLITE_ROW);
 	printf("\n");
@@ -187,8 +188,39 @@ void alqPelicula(Usuario u, Pelicula p, int codAlquiler){
 
 }
 
-//devuelve un array de peliculas de todas las peliculas de la bd (NS SI ESTA BN)
-Pelicula* devolPelicula(){
+int numPelis(){
+	sqlite3 *db;
+		sqlite3_stmt *stmt;
+		int result;
+		sqlite3_open("BaseDeDatos", &db);
+		int dispo=1;
+
+		////////////////////////
+		int numPelis = 0;
+
+		////////////////////////
+
+		char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula where disponibilidad=?;";
+
+		sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
+		sqlite3_bind_int(stmt, 1, dispo);
+
+		printf("\n");
+		do {
+			result = sqlite3_step(stmt) ;
+			if (result == SQLITE_ROW) {
+			numPelis++;
+			}
+		} while (result == SQLITE_ROW);
+	//	return arrayP;
+		sqlite3_finalize(stmt);
+		return numPelis;
+		sqlite3_close(db);
+
+}
+
+//devuelve un array de peliculas de todas las peliculas de la bd
+Pelicula* devolPelicula(int numPelis){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 	int result;
@@ -196,12 +228,13 @@ Pelicula* devolPelicula(){
 	int dispo=1;
 
 	////////////////////////
-	int numPelis = 0;
+	int numPelis2=0;
 	Pelicula *arrayP;
+	arrayP = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis));
 
 	////////////////////////
 
-	char sql2[] = "select cod_p, pelicula.nombre, precio, disponibilidad, generos.nombre, valoracion, minutos from pelicula, generos where disponibilidad=? and pelicula.cod_p=generos.cod;";
+	char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula where disponibilidad=?;";
 
 	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
 	sqlite3_bind_int(stmt, 1, dispo);
@@ -211,23 +244,32 @@ Pelicula* devolPelicula(){
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
-			numPelis++;
 			Pelicula peli;
-			peli.nombre = sqlite3_column_text(stmt, 1);
+		//	peli.nombre = (char*)(malloc(sizeof(char)* strlen(sqlite3_column_text(stmt, 1))));
+			peli.nombre = (char*)sqlite3_column_text(stmt, 1);
+		//	strcpy(peli.nombre, sqlite3_column_text(stmt, 1));
 			peli.codPelicula = sqlite3_column_int(stmt, 0);
 			peli.precio = sqlite3_column_double(stmt, 2);
 			peli.genero = sqlite3_column_int(stmt, 4);
 			peli.valoracion = sqlite3_column_double(stmt, 5);
 			peli.disponibilidad = sqlite3_column_int(stmt, 3);
 			peli.minutos = sqlite3_column_int(stmt, 4);
-			arrayP = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis));
-			arrayP[numPelis-1]= peli;
-			//printf("[Cod: %s, Nombre: %s, Precio: %s, Genero: %s, Valoracion: %s, Minutos: %s]\n",sqlite3_column_text(stmt, 0) , sqlite3_column_text(stmt, 1), sqlite3_column_text(stmt, 2), sqlite3_column_text(stmt, 4), sqlite3_column_text(stmt, 5), sqlite3_column_text(stmt, 6));
+
+			arrayP[numPelis2].nombre= (char*)(malloc(sizeof(char)*strlen(peli.nombre)));
+			strcpy(arrayP[numPelis2].nombre, peli.nombre);
+			arrayP[numPelis2].codPelicula= peli.codPelicula;
+			arrayP[numPelis2].precio= peli.precio;
+			arrayP[numPelis2].genero= peli.genero;
+			arrayP[numPelis2].valoracion= peli.valoracion;
+			arrayP[numPelis2].disponibilidad= peli.disponibilidad;
+			numPelis2++;
+
 		}
 	} while (result == SQLITE_ROW);
-	return arrayP;
+
 	sqlite3_finalize(stmt);
 
+	return arrayP;
 	sqlite3_close(db);
 
 }
