@@ -294,3 +294,16 @@ void mostrarMenuGenero(Almacen a){
 	printf("ACABADO \n");
 }
 
+int introducirPeliAlq(){
+	char str[MAX_LINE];
+	int codP;
+
+	printf("Introduce el código de película que quieres alquilar:\n");
+	fflush(stdout);
+	fgets(str, MAX_LINE, stdin);
+	sscanf(str, "%i", &codP);
+
+	return codP;
+
+}
+

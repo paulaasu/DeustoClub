@@ -14,7 +14,7 @@ void editarUsuario(Usuario *u, char* n, char* c){
 }
 
 void imprimirUsuario(Usuario u){
-	printf("Usuario: %s, Contraseña: %s \n", u.nombre, u.contrasenia);
+	printf("Usuario: %s, Contraseña: %s , Gastado: %f \n", u.nombre, u.contrasenia, u.gastado);
 }
 
 int comprobarDatos(char* c1, char* c2){

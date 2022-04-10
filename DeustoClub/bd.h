@@ -16,7 +16,11 @@ void visualizarPeliculasDisp();
 int comprobarUsuario(char *u, char *c);
 void alqPelicula(Usuario u, Pelicula p, int codAlquiler);
 int numPelis();
-Pelicula* devolPelicula(int numPelis);
+Pelicula* arrayPeliculas(int numPelis);
 void verMisPelis(Usuario u);
+void cambiarGastado(Usuario u, float cantidad);
+int numUsuario();
+Usuario* arrayUsuarios(int numUsuario);
+
 
 #endif /* BD_H_ */

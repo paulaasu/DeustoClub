@@ -11,6 +11,7 @@
 typedef struct{
 	char *nombre;
 	char *contrasenia;
+	float gastado; //?
 
 
 }Usuario;

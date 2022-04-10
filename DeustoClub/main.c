@@ -16,35 +16,25 @@ int main(void) {
 
 	Almacen a;
 	Pelicula *arrayPeliDisp = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis()));
-	arrayPeliDisp = devolPelicula(numPelis());
+	arrayPeliDisp = arrayPeliculas(numPelis());
 	crearAlmacen(&a, arrayPeliDisp, numPelis());
+
+	Usuario *arrayU = (Usuario*)(malloc(sizeof(Usuario)*numUsuario()));
+	arrayU = arrayUsuarios(numUsuario());
+//	for(int i=0; i<numUsuario();i++){
+//		imprimirUsuario(arrayU[i]);
+//	}
 
 	mostrarMenu(a);
 
-//	for(int i=0; i<numPelis(); i++){
-//			imprimirPelicula(arrayPeliDisp[i]);
-//		}
-
-
+//	introducirPeliAlq();
 //	Usuario u;
-//	imprimirUsuario(u);
-//	editarUsuario(&u, "Joseba", "5555");
-//	imprimirUsuario(u);
-//	printf("Igual= %i\n", comprobarDatos(u.contrasenia, "5655"));
-//	printf("Correcta= %i\n", comprobarcontrasenya("aaa", "aaa"));
-//	registrarUsuario();
+//	u.nombre= "Paula";
+//	float cantidad = 80.5;
+//	printf("Cantidad1: %f", cantidad);
+//	cambiarGastado(u, cantidad);
+//	printf("OK");
 
-//	Usuario J;
-//	J.nombre = "Joseba";
-//	J.contrasenia ="313";
-//
-//	printf("Usuario:%i\n", comprobarUsuario(J.nombre, J.contrasenia));
-
-//	Usuario u1;
-//	u1.nombre = "Maria";
-//	u1.contrasenia= "2222";
-//	anyadirUsuario(u1);
-//	visualizarPeliculasDisp();
 
 
 	return 0;
