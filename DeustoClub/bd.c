@@ -274,6 +274,32 @@ Pelicula* devolPelicula(int numPelis){
 
 }
 
+void verMisPelis(Usuario u){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	sqlite3_open("BaseDeDatos", &db);
+
+	char sql2[] = "select cod_p, pelicula.nombre, precio, disponibilidad, generos.nombre, valoracion, minutos from pelicula, generos, alquiler, usuario where pelicula.genero=generos.cod and usuario.usuario = alquiler.usuario and alquiler.cod_pelicula=pelicula.cod_p and usuario=?;";
+
+	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
+	sqlite3_bind_text(stmt, 1, u.nombre, strlen(u.nombre), SQLITE_STATIC);
+
+
+	printf("\n");
+	printf("Mostrando tus películas:\n"); //te muestra el codigo
+	do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			printf("[Cod: %s, Nombre: %i, Precio: %s, Genero: %s, Valoracion: %s, Minutos: %s]\n",sqlite3_column_text(stmt, 0) , sqlite3_column_text(stmt, 1), sqlite3_column_text(stmt, 2), sqlite3_column_text(stmt, 4), sqlite3_column_text(stmt, 5), sqlite3_column_text(stmt, 6));
+		}
+	} while (result == SQLITE_ROW);
+	printf("\n");
+	sqlite3_finalize(stmt);
+
+	sqlite3_close(db);
+
+}
 
 //hace que la disponibilidad se cambie a 0, es decir, no esté disponible ESTÁ MAL
 //void reservarPelicula(Pelicula p){
