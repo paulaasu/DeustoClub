@@ -20,7 +20,6 @@ int comprobarcontrasenya(char* c1, char* c2){
 	return correcto;
 }
 void mostrarMenu(Almacen a){
-	printf("Numpel: %i", a.numPeliculas);
 	char c;
 	printf("----------------------\n");
 	printf("DEUSTOCLUB\n");
@@ -154,7 +153,7 @@ Usuario registrarUsuario(){
 
 
 void menuPrincipal(Almacen a){
-	printf("Numpel: %i", a.numPeliculas);
+
 	char c;
 		printf("...........................\n");
 		printf("Bienvenido a DeustoClub!\n");
@@ -163,7 +162,7 @@ void menuPrincipal(Almacen a){
 
 	if (c == '1') {
 		fflush(stdin);
-		filtrarDisponibles(a);
+		visualizarPeliculasDisp();
 	}
 
 	if (c == '2') {
@@ -172,6 +171,7 @@ void menuPrincipal(Almacen a){
 	}
 	if (c == '4') {
 		fflush(stdin);
+		mostrarMenuFiltro(a);
 
 	}
 
@@ -188,7 +188,109 @@ void menuPrincipal(Almacen a){
 
 	}while(c != '5' );
 	printf("ACABADO \n");
-
-
-
 }
+void mostrarMenuFiltro(Almacen a){
+
+	char c;
+	printf("----------------------\n");
+	printf("FILTROS\n");
+	printf("----------------------\n");
+	printf("Eliga un filtro:\n");
+	do{
+
+	if (c == '1') {
+		fflush(stdin);
+		mostrarMenuGenero(a);
+
+	}
+
+	if (c == '2') {
+		fflush(stdin);
+		printf("Presio? ");
+		char str[MAX_LINE];
+		float precio;
+
+		//char formato1 = (char)(malloc(sizeof(char*)*(MAX_LINE)));
+		printf("Precio maximo: \n");
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%f", &precio);
+		filtrarPrecioMax(a, precio);
+
+
+
+
+	}
+
+	if(c != '\n'){
+		printf("1.Género\n");
+		printf("2.Precio máximo\n");
+		printf("3.Volver\n");
+	}
+
+	fflush(stdout);
+	c = getchar();
+
+	}while(c != '3' );
+	printf("ACABADO \n");
+}
+void mostrarMenuGenero(Almacen a){
+
+	char c;
+	printf("----------------------\n");
+	printf("GENEROS\n");
+	printf("----------------------\n");
+	printf("Eliga un genero:\n");
+	do{
+
+	if (c == '1') {
+		fflush(stdin);
+		filtrarGenero(a, 1);
+
+	}
+
+	if (c == '2') {
+		fflush(stdin);
+		filtrarGenero(a, 2);
+
+	}
+	if (c == '3') {
+		fflush(stdin);
+		filtrarGenero(a, 3);
+
+	}
+
+	if (c == '4') {
+		fflush(stdin);
+		filtrarGenero(a, 4);
+
+	}
+	if (c == '5') {
+		fflush(stdin);
+		filtrarGenero(a, 5);
+
+	}
+
+	if (c == '6') {
+		fflush(stdin);
+		filtrarGenero(a, 6);
+
+	}
+
+	if(c != '\n'){
+		printf("1.Ciencia ficción\n");
+		printf("2.Aventura\n");
+		printf("3.Romance\n");
+		printf("4.Terror\n");
+		printf("5.Comedia\n");
+		printf("6.Thriller\n");
+		printf("7.Volver\n");
+	}
+
+	fflush(stdout);
+	c = getchar();
+
+	}while(c != '7' );
+	printf("ACABADO \n");
+}
+

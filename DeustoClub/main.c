@@ -18,7 +18,6 @@ int main(void) {
 	Pelicula *arrayPeliDisp = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis()));
 	arrayPeliDisp = devolPelicula(numPelis());
 	crearAlmacen(&a, arrayPeliDisp, numPelis());
-	listarPeliculas(a);
 
 	mostrarMenu(a);
 
