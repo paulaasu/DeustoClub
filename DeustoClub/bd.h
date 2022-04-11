@@ -21,6 +21,7 @@ void verMisPelis(Usuario u);
 void cambiarGastado(Usuario u, float cantidad);
 int numUsuario();
 Usuario* arrayUsuarios(int numUsuario);
+void eliminarAlq(Usuario u, Pelicula p);
 
 
 #endif /* BD_H_ */
