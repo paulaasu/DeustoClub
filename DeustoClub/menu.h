@@ -16,4 +16,5 @@ int comprobarcontrasenya(char* c1, char* c2);
 void mostrarMenuAdmin(Almacen a);
 Pelicula anyadirPeli();
 Pelicula eliminarPeli(Almacen a);
+escribirFicheroUsuario();
 #endif /* MENU_H_ */

@@ -329,6 +329,11 @@ void mostrarMenuAdmin(Almacen a){
 		fflush(stdin);
 		eliminarPelicula(eliminarPeli(a));
 }
+	if (c == '3') {
+		fflush(stdin);
+		escFich();
+	}
+
 
 	if(c != '\n'){
 	printf("1.Añadir peliculas \n");
@@ -351,6 +356,7 @@ Pelicula anyadirPeli(){
 		int cod= max+1;
 
 		peli.codPelicula = cod;
+
 		char *formato1 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
 		printf("Nombre película:\n");
 		fflush(stdout);
@@ -373,7 +379,7 @@ Pelicula anyadirPeli(){
 		peli.disponibilidad=1; //la disponibilidad es 1
 
 
-		printf("Género:\n");
+		printf("Introduce el numero del género:\n");
 		printf("1.Ciencia ficción\n");
 		printf("2.Aventura\n");
 		printf("3.Romance\n");
@@ -406,7 +412,6 @@ Pelicula anyadirPeli(){
 		return peli;
 }
 
-
 Pelicula eliminarPeli(Almacen a){
 	char str[MAX_LINE];
 	Pelicula peli;
@@ -423,4 +428,18 @@ Pelicula eliminarPeli(Almacen a){
 		}
 	}
 return peli;
+}
+void escFich(){
+		FILE* f;
+		Usuario * au;
+		au = arrayUsuarios(numUsuario);
+		f = fopen("usuario.txt", "w");
+		fprintf(f, "-------------- \n");
+		fprintf(f, "Gastos por usuario \n");
+		fprintf(f, "-------------- \n");
+		for (int var = 0; var < numUsuario() ; ++var) {
+			fprintf(f, "%s-----%f\n", au[var].nombre, au[var].gastado);
+		}
+		printf("Datos guardados correctamente\n");
+		fclose(f);
 }
