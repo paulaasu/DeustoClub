@@ -80,13 +80,15 @@ Usuario inicioSesion(Almacen a){
 	strcpy(u.contrasenia, formato2);
 	free(formato2);
 	int comprobar = comprobarUsuario(u.nombre, u.contrasenia);
+//	int comprobarAdmin = comprobarUsuarioAdmin(u.nombre, u.contrasenia);
 	if(comprobar != 1){
-		printf("Usuario incorrecto \n");
+	printf("Usuario incorrecto \n");
 	}
-	else{
-		menuPrincipal(a);
+	else if(strcmp(u.nombre, "admin") == 0 && strcmp(u.contrasenia, "admin") == 0){
+	mostrarMenuAdmin(a);
+	}else{
+	menuPrincipal(a);
 	}
-
 	return u;
 
 }
@@ -166,8 +168,9 @@ void menuPrincipal(Almacen a){
 	}
 
 	if (c == '2') {
-//		fflush(stdin);
-//		anyadirUsuario(registrarUsuario());
+		fflush(stdin);
+		introducirPeliAlq();
+
 	}
 	if (c == '4') {
 		fflush(stdin);
@@ -307,3 +310,31 @@ int introducirPeliAlq(){
 
 }
 
+void mostrarMenuAdmin(Almacen a){
+char c;
+printf("----------------------\n");
+printf("DEUSTOCLUB\n");
+printf("----------------------\n");
+printf("Bienvenido al menu Administrador:\n");
+do{
+
+if (c == '1') {
+fflush(stdin);
+}
+
+if (c == '2') {
+fflush(stdin);
+}
+
+if(c != '\n'){
+printf("1.Añadir peliculas \n");
+printf("2.Borrar peliculas \n");
+printf("3.Salir\n");
+}
+
+fflush(stdout);
+c = getchar();
+
+}while(c != '3' );
+printf("ACABADO \n");
+}

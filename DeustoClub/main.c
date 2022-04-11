@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "menu.h"
 #include <string.h>
-//#include "bd.c"
+#include "bd.h"
 
 #define MAX_LINE 20
 
@@ -24,6 +24,7 @@ int main(void) {
 //	for(int i=0; i<numUsuario();i++){
 //		imprimirUsuario(arrayU[i]);
 //	}
+	printf("Max: %i", buscarMaxCodAlq());
 
 	mostrarMenu(a);
 

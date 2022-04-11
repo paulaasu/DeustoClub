@@ -14,6 +14,7 @@ void anyadirPelicula(Pelicula p);
 void updatePelicula(Pelicula p);
 void visualizarPeliculasDisp();
 int comprobarUsuario(char *u, char *c);
+int buscarMaxCodAlq();
 void alqPelicula(Usuario u, Pelicula p, int codAlquiler);
 int numPelis();
 Pelicula* arrayPeliculas(int numPelis);

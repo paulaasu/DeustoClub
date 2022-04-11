@@ -152,6 +152,31 @@ int comprobarUsuario(char *u, char *c){
 
 }
 
+int buscarMaxCodAlq(){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	int codAlquiler = 0;
+	sqlite3_open("BaseDeDatos", &db);
+	/* --- INSERT --- */
+	char sql1[] = "select max(cod_alquiler) from alquiler;";
+
+
+	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL) ;
+//	sqlite3_bind_int(stmt, 1, codAlquiler);
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error!\n");
+	}else{
+		printf("Correcto\n");
+	}
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+	return codAlquiler;
+}
+
 //añade a la tabla alquilar el usuario y pelicula y el codigo alquiler
 void alqPelicula(Usuario u, Pelicula p, int codAlquiler){
 	sqlite3 *db;

@@ -1,5 +1,6 @@
 
 #include "pelicula.h"
+#include "almacen.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,6 +20,7 @@ void editarPelicula(Pelicula *p, int cod, char* nom, float prec, int gen, float 
 void alquilarPelicula(Pelicula *p){
 	p->disponibilidad = 0;
 }
+
 void devolverPelicula(Pelicula *p){
 	p->disponibilidad = 1;
 }
