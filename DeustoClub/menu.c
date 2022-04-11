@@ -10,8 +10,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-#define MAX_LINE 10
+#define MAX_LINE 30
 #include "menu.h"
+#include "almacen.h"
+#include "bd.h"
+
 int comprobarcontrasenya(char* c1, char* c2){
 	int correcto = 1;
 	if (strcmp(c1, c2)) {
@@ -209,7 +212,6 @@ void mostrarMenuFiltro(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
-		printf("Presio? ");
 		char str[MAX_LINE];
 		float precio;
 
@@ -311,38 +313,44 @@ int introducirPeliAlq(){
 }
 
 void mostrarMenuAdmin(Almacen a){
-char c;
-printf("----------------------\n");
-printf("DEUSTOCLUB\n");
-printf("----------------------\n");
-printf("Bienvenido al menu Administrador:\n");
-do{
+	char c;
+	printf("----------------------\n");
+	printf("DEUSTOCLUB\n");
+	printf("----------------------\n");
+	printf("Bienvenido al menu Administrador:\n");
+	do{
 
-if (c == '1') {
-fflush(stdin);
+	if (c == '1') {
+		fflush(stdin);
+		anyadirPelicula(anyadirPeli());
 }
 
-if (c == '2') {
-fflush(stdin);
+	if (c == '2') {
+		fflush(stdin);
+		eliminarPelicula(eliminarPeli(a));
 }
 
-if(c != '\n'){
-printf("1.Añadir peliculas \n");
-printf("2.Borrar peliculas \n");
-printf("3.Salir\n");
-}
+	if(c != '\n'){
+	printf("1.Añadir peliculas \n");
+	printf("2.Borrar peliculas \n");
+	printf("3.Escribir fichero \n");
+	printf("4.Salir\n");
+	}
 
-fflush(stdout);
-c = getchar();
+	fflush(stdout);
+	c = getchar();
 
-}while(c != '3' );
-printf("ACABADO \n");
+	}while(c != '4' );
+	printf("ACABADO \n");
 }
 
 Pelicula anyadirPeli(){
 		char str[MAX_LINE];
 		Pelicula peli;
+		int max = buscarMaxCodPel();
+		int cod= max+1;
 
+		peli.codPelicula = cod;
 		char *formato1 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
 		printf("Nombre película:\n");
 		fflush(stdout);
@@ -364,16 +372,20 @@ Pelicula anyadirPeli(){
 
 		peli.disponibilidad=1; //la disponibilidad es 1
 
-		char *formato2 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
+
 		printf("Género:\n");
+		printf("1.Ciencia ficción\n");
+		printf("2.Aventura\n");
+		printf("3.Romance\n");
+		printf("4.Terror\n");
+		printf("5.Comedia\n");
+		printf("6.Thriller\n");
+		int genero;
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
-		sscanf(str, "%s", formato2);
+		sscanf(str, "%i", &genero);
 		fflush(stdin);
-		int tamanyo2 = strlen(formato2);
-		peli.genero= (char*)(malloc(sizeof(char)*(tamanyo2+1)));
-		strcpy(peli.genero, formato2);
-		free(formato2);
+		peli.genero=genero;
 
 		float valoracion;
 		printf("Valoración:\n");
@@ -387,9 +399,28 @@ Pelicula anyadirPeli(){
 		printf("Duración en minutos:\n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
-		sscanf(str, "%f", &minutos);
+		sscanf(str, "%i", &minutos);
 		fflush(stdin);
 		peli.minutos = minutos;
 
 		return peli;
+}
+
+
+Pelicula eliminarPeli(Almacen a){
+	char str[MAX_LINE];
+	Pelicula peli;
+
+	int cod_p;
+	printf("Introduce el codigo de la pelicula que deseas eliminar:\n");
+	fflush(stdout);
+	fgets(str, MAX_LINE, stdin);
+	sscanf(str, "%i", &cod_p);
+	fflush(stdin);
+	for (int var = 0; var < a.numPeliculas; ++var) {
+		if (a.ArrayP[var].codPelicula==cod_p) {
+			peli = a.ArrayP[var];
+		}
+	}
+return peli;
 }

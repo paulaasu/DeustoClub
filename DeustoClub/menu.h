@@ -14,5 +14,6 @@ Usuario inicioSesion(Almacen a);
 Usuario registrarUsuario();
 int comprobarcontrasenya(char* c1, char* c2);
 void mostrarMenuAdmin(Almacen a);
-
+Pelicula anyadirPeli();
+Pelicula eliminarPeli(Almacen a);
 #endif /* MENU_H_ */

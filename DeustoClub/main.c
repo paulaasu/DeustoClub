@@ -24,7 +24,6 @@ int main(void) {
 //	for(int i=0; i<numUsuario();i++){
 //		imprimirUsuario(arrayU[i]);
 //	}
-	printf("Max: %i", buscarMaxCodAlq());
 
 	mostrarMenu(a);
 

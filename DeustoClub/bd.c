@@ -57,9 +57,9 @@ void anyadirPelicula(Pelicula p){
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error en el usuario registrado!\n");
+		printf("Error al añadir la pelicula!\n");
 	}else{
-		printf("Usuario correctamente registrado\n");
+		printf("Pelicula añadida correctamente\n");
 	}
 
 	sqlite3_finalize(stmt);
@@ -204,6 +204,31 @@ int buscarMaxCodAlq(){
 	sqlite3_close(db);
 
 }
+int buscarMaxCodPel(){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	int codMax;
+	sqlite3_open("BaseDeDatos", &db);
+	/* --- INSERT --- */
+	char sql1[] = "select max(cod_p) from pelicula;";
+
+
+	sqlite3_prepare_v2(db, sql1, strlen(sql1), &stmt, NULL) ;
+
+	result = sqlite3_step(stmt);
+	if (result == SQLITE_ROW) {
+		codMax = sqlite3_column_int(stmt, 0);
+	}else{
+		printf("Error!\n");
+	}
+
+	sqlite3_finalize(stmt);
+	return codMax;
+	sqlite3_close(db);
+
+}
+
 
 //añade a la tabla alquilar el usuario y pelicula y el codigo alquiler
 void alqPelicula(Usuario u, Pelicula p, int codAlquiler){

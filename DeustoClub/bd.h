@@ -23,6 +23,7 @@ void cambiarGastado(Usuario u, float cantidad);
 int numUsuario();
 Usuario* arrayUsuarios(int numUsuario);
 void eliminarAlq(Usuario u, Pelicula p);
+int buscarMaxCodPel();
 
 
 #endif /* BD_H_ */
