@@ -338,3 +338,58 @@ c = getchar();
 }while(c != '3' );
 printf("ACABADO \n");
 }
+
+Pelicula anyadirPeli(){
+		char str[MAX_LINE];
+		Pelicula peli;
+
+		char *formato1 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
+		printf("Nombre película:\n");
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%s", formato1);
+		fflush(stdin);
+		int tamanyo = strlen(formato1);
+		peli.nombre = (char*)(malloc(sizeof(char*)*(tamanyo+1)));
+		strcpy(peli.nombre, formato1);
+		free(formato1);
+
+		float precio;
+		printf("Precio:\n");
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%f", &precio);
+		fflush(stdin);
+		peli.precio = precio;
+
+		peli.disponibilidad=1; //la disponibilidad es 1
+
+		char *formato2 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
+		printf("Género:\n");
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%s", formato2);
+		fflush(stdin);
+		int tamanyo2 = strlen(formato2);
+		peli.genero= (char*)(malloc(sizeof(char)*(tamanyo2+1)));
+		strcpy(peli.genero, formato2);
+		free(formato2);
+
+		float valoracion;
+		printf("Valoración:\n");
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%f", &valoracion);
+		fflush(stdin);
+		peli.valoracion = valoracion;
+
+		int minutos;
+		printf("Duración en minutos:\n");
+		fflush(stdout);
+		fgets(str, MAX_LINE, stdin);
+		sscanf(str, "%f", &minutos);
+		fflush(stdin);
+		peli.minutos = minutos;
+
+		return peli;
+}

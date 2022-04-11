@@ -24,3 +24,6 @@ int comprobarDatos(char* c1, char* c2){
 	}
 	return igual;
 }
+
+
+
