@@ -19,21 +19,14 @@ int main(void) {
 	arrayPeliDisp = arrayPeliculas(numPelis());
 	crearAlmacen(&a, arrayPeliDisp, numPelis());
 
+
 	Usuario *arrayU = (Usuario*)(malloc(sizeof(Usuario)*numUsuario()));
 	arrayU = arrayUsuarios(numUsuario());
-//	for(int i=0; i<numUsuario();i++){
-//		imprimirUsuario(arrayU[i]);
-//	}
+
 
 	mostrarMenu(a);
 
-//	introducirPeliAlq();
-//	Usuario u;
-//	u.nombre= "Paula";
-//	float cantidad = 80.5;
-//	printf("Cantidad1: %f", cantidad);
-//	cambiarGastado(u, cantidad);
-//	printf("OK");
+
 
 
 

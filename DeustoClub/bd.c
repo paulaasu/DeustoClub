@@ -51,7 +51,7 @@ void anyadirPelicula(Pelicula p){
 	sqlite3_bind_double(stmt, 3, p.precio);
 	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la película
 	sqlite3_bind_int(stmt, 5, p.genero);
-	sqlite3_bind_double(stmt, 6, p.valoracion);
+	sqlite3_bind_int(stmt, 6, p.valoracion);
 	sqlite3_bind_int(stmt, 7, p.minutos);
 
 
@@ -179,31 +179,7 @@ int comprobarUsuario(char *u, char *c){
 
 }
 
-int buscarMaxCodAlq(){
-	sqlite3 *db;
-	sqlite3_stmt *stmt;
-	int result;
-	int codMax;
-	sqlite3_open("BaseDeDatos", &db);
-	/* --- INSERT --- */
-	char sql1[] = "select max(cod_alquiler) from alquiler;";
 
-
-	sqlite3_prepare_v2(db, sql1, strlen(sql1), &stmt, NULL) ;
-//	sqlite3_bind_int(stmt, 1, codAlquiler);
-
-	result = sqlite3_step(stmt);
-	if (result == SQLITE_ROW) {
-		codMax = sqlite3_column_int(stmt, 0);
-	}else{
-		printf("Error!\n");
-	}
-
-	sqlite3_finalize(stmt);
-	return codMax;
-	sqlite3_close(db);
-
-}
 int buscarMaxCodPel(){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
@@ -231,22 +207,18 @@ int buscarMaxCodPel(){
 
 
 //añade a la tabla alquilar el usuario y pelicula y el codigo alquiler
-void alqPelicula(Usuario u, Pelicula p, int codAlquiler){
+void alqPelicula(Usuario u, int cod_p){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 	int result;
 
 	sqlite3_open("BaseDeDatos", &db);
 	/* --- INSERT --- */
-	char sql1[] = "insert into alquiler(cod_alquiler, cod_pelicula, usuario) values (?, ?, ?)";
-	int gastado = 0;
+	char sql1[] = "insert into alquiler(usuario, cod_p) values (?, ?)";
 
 	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL) ;
-	sqlite3_bind_int(stmt, 1, codAlquiler);
-	sqlite3_bind_int(stmt, 2, p.codPelicula);
-	sqlite3_bind_text(stmt, 3, u.nombre, strlen(u.nombre), SQLITE_STATIC);
-
-
+	sqlite3_bind_text(stmt, 1, u.nombre, strlen(u.nombre), SQLITE_STATIC);
+	sqlite3_bind_int(stmt, 2, cod_p);
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {

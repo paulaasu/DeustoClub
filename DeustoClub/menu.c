@@ -41,7 +41,7 @@ void mostrarMenu(Almacen a){
 	}
 
 	if(c != '\n'){
-		printf("1.Iniciar sesion\n");
+		printf("1.Iniciar sesiÃ³n\n");
 		printf("2.Registrar usuario\n");
 		printf("3.Salir\n");
 	}
@@ -56,7 +56,7 @@ void mostrarMenu(Almacen a){
 
 Usuario inicioSesion(Almacen a){
 	printf("----------------------\n");
-	printf("INICIO SESION\n");
+	printf("INICIO SESIÃ“N\n");
 	printf("----------------------\n");
 	char str[MAX_LINE];
 	Usuario u;
@@ -73,7 +73,7 @@ Usuario inicioSesion(Almacen a){
 	free(formato1);
 
 	char *formato2 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
-	printf("Introduce contraseña:\n");
+	printf("Introduce contraseÃ±a:\n");
 	fflush(stdout);
 	fgets(str, MAX_LINE, stdin);
 	sscanf(str, "%s", formato2);
@@ -90,7 +90,7 @@ Usuario inicioSesion(Almacen a){
 	else if(strcmp(u.nombre, "admin") == 0 && strcmp(u.contrasenia, "admin") == 0){
 	mostrarMenuAdmin(a);
 	}else{
-	menuPrincipal(a);
+	menuPrincipal(a, u);
 	}
 	return u;
 
@@ -112,7 +112,7 @@ Usuario registrarUsuario(){
 		strcpy(u.nombre, formato1);
 
 
-		printf("Introduce contraseña:\n");
+		printf("Introduce contraseÃ±a:\n");
 
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
@@ -122,7 +122,7 @@ Usuario registrarUsuario(){
 		char* contrasenia = (char*)(malloc(sizeof(char)*(tamanyo2+1)));
 		strcpy(contrasenia, formato1);
 
-		printf("Repita la contraseña: \n");
+		printf("Repita la contraseÃ±a: \n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%s", formato1);
@@ -135,8 +135,8 @@ Usuario registrarUsuario(){
 //		printf("Correcta: %i", correcta);
 
 		while(correcta != 1){
-			printf("¡ERROR! la contraseña es incorrecta, vuelve a introducirla \n");
-			printf("Repita la contraseña:\n");
+			printf("Â¡ERROR! la contraseÃ±a es incorrecta, vuelve a introducirla \n");
+			printf("Repita la contraseÃ±a:\n");
 			fflush(stdout);
 			fgets(str, MAX_LINE, stdin);
 			sscanf(str, "%s", formato1);
@@ -157,11 +157,11 @@ Usuario registrarUsuario(){
 }
 
 
-void menuPrincipal(Almacen a){
+void menuPrincipal(Almacen a, Usuario u){
 
 	char c;
 		printf("...........................\n");
-		printf("Bienvenido a DeustoClub!\n");
+		printf("Bienvenido a DeustoClub %s!\n", u.nombre);
 		printf("...........................\n");
 	do{
 
@@ -172,7 +172,9 @@ void menuPrincipal(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
-		introducirPeliAlq();
+		visualizarPeliculasDisp();
+		int cod_p = introducirPeliAlq();
+		alqPelicula(u, cod_p);
 
 	}
 	if (c == '4') {
@@ -182,10 +184,10 @@ void menuPrincipal(Almacen a){
 	}
 
 	if(c != '\n'){
-		printf("1. Visualizar películas disponibles\n");
-		printf("2. Alquilar película\n");
-		printf("3. Devolver película\n");
-		printf("4. Filtrar película\n");
+		printf("1. Visualizar pelÃ­culas disponibles\n");
+		printf("2. Alquilar pelÃ­cula\n");
+		printf("3. Devolver pelÃ­cula\n");
+		printf("4. Filtrar pelÃ­cula\n");
 		printf("5. Volver\n");
 	}
 
@@ -228,8 +230,8 @@ void mostrarMenuFiltro(Almacen a){
 	}
 
 	if(c != '\n'){
-		printf("1.Género\n");
-		printf("2.Precio máximo\n");
+		printf("1.GÃ©nero\n");
+		printf("2.Precio mÃ¡ximo\n");
 		printf("3.Volver\n");
 	}
 
@@ -283,7 +285,7 @@ void mostrarMenuGenero(Almacen a){
 	}
 
 	if(c != '\n'){
-		printf("1.Ciencia ficción\n");
+		printf("1.Ciencia ficciÃ³n\n");
 		printf("2.Aventura\n");
 		printf("3.Romance\n");
 		printf("4.Terror\n");
@@ -303,7 +305,7 @@ int introducirPeliAlq(){
 	char str[MAX_LINE];
 	int codP;
 
-	printf("Introduce el código de película que quieres alquilar:\n");
+	printf("Introduce el cÃ³digo de pelÃ­cula que quieres alquilar:\n");
 	fflush(stdout);
 	fgets(str, MAX_LINE, stdin);
 	sscanf(str, "%i", &codP);
@@ -329,7 +331,6 @@ void mostrarMenuAdmin(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
-		a.ArrayP = arrayPeliculas(numPelis);
 		eliminarPelicula(eliminarPeli(a));
 		a.ArrayP = arrayPeliculas(numPelis);
 }
@@ -340,7 +341,7 @@ void mostrarMenuAdmin(Almacen a){
 
 
 	if(c != '\n'){
-	printf("1.Añadir peliculas \n");
+	printf("1.AÃ±adir peliculas \n");
 	printf("2.Borrar peliculas \n");
 	printf("3.Escribir fichero \n");
 	printf("4.Salir\n");
@@ -362,7 +363,7 @@ Pelicula anyadirPeli(){
 		peli.codPelicula = cod;
 
 		char *formato1 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
-		printf("Nombre película usando _ en lugar de espacios:\n");
+		printf("Nombre pelÃ­cula usando _ en lugar de espacios:\n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%s", formato1);
@@ -371,6 +372,7 @@ Pelicula anyadirPeli(){
 
 		peli.nombre = (char*)(malloc(sizeof(char)*(tamanyo+1)));
 		strcpy(peli.nombre, formato1);
+		printf("%s", peli.nombre);
 		free(formato1);
 
 		float precio;
@@ -384,8 +386,8 @@ Pelicula anyadirPeli(){
 		peli.disponibilidad=1; //la disponibilidad es 1
 
 
-		printf("Introduce el numero del género:\n");
-		printf("1.Ciencia ficción\n");
+		printf("Introduce el numero del gÃ©nero:\n");
+		printf("1.Ciencia ficciÃ³n\n");
 		printf("2.Aventura\n");
 		printf("3.Romance\n");
 		printf("4.Terror\n");
@@ -399,7 +401,7 @@ Pelicula anyadirPeli(){
 		peli.genero=genero;
 
 		float valoracion;
-		printf("Valoración:\n");
+		printf("ValoraciÃ³n:\n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%f", &valoracion);
@@ -407,7 +409,7 @@ Pelicula anyadirPeli(){
 		peli.valoracion = valoracion;
 
 		int minutos;
-		printf("Duración en minutos:\n");
+		printf("DuraciÃ³n en minutos:\n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%i", &minutos);
@@ -421,7 +423,6 @@ Pelicula eliminarPeli(Almacen a){
 	visualizarPeliculasDisp();
 	char str[MAX_LINE];
 	Pelicula peli;
-
 
 	int cod_p;
 	printf("Introduce el codigo de la pelicula que deseas eliminar:\n");
