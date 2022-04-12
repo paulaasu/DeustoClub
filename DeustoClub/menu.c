@@ -85,7 +85,6 @@ Usuario inicioSesion(Almacen a){
 	strcpy(u.contrasenia, formato2);
 	free(formato2);
 	int comprobar = comprobarUsuario(u.nombre, u.contrasenia);
-//	int comprobarAdmin = comprobarUsuarioAdmin(u.nombre, u.contrasenia);
 	if(comprobar != 1){
 	printf("Usuario incorrecto \n");
 	}
@@ -131,10 +130,8 @@ Usuario registrarUsuario(){
 		int tamanyo3 = strlen(formato1);
 		char* contraseniaRepe = (char*)(malloc(sizeof(char)*(tamanyo3+1)));
 		strcpy(contraseniaRepe, formato1);
-//		printf("Contrasenia: %s \n", contrasenia);
-//		printf("ContraseniaRepe: %s \n", contraseniaRepe);
+
 		int correcta = comprobarcontrasenya(contrasenia, contraseniaRepe);
-//		printf("Correcta: %i", correcta);
 
 		while(correcta != 1){
 			printf("¡ERROR! la contraseña es incorrecta, vuelve a introducirla \n");
@@ -250,7 +247,6 @@ void mostrarMenuFiltro(Almacen a){
 		char str[MAX_LINE];
 		float precio;
 
-		//char formato1 = (char)(malloc(sizeof(char*)*(MAX_LINE)));
 		printf("Precio maximo: \n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
@@ -364,9 +360,7 @@ void mostrarMenuAdmin(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
-//		a.ArrayP = arrayPeliculas(numPelis);
 		eliminarPelicula(preguntarEliminarPeli());
-		//a.ArrayP = arrayPeliculas(numPelis);
 }
 	if (c == '3') {
 		fflush(stdin);

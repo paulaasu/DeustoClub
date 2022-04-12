@@ -1,9 +1,3 @@
-/*
- * almacen.c
- *
- *  Created on: 5 abr 2022
- *      Author: IKER MARCELO
- */
 
 #include "bd.h"
 #include "pelicula.h"

@@ -1,9 +1,4 @@
-/*
- * almacen.h
- *
- *  Created on: 5 abr 2022
- *      Author: IKER MARCELO
- */
+
 #include "pelicula.h"
 #ifndef ALMACEN_H_
 #define ALMACEN_H_

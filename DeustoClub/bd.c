@@ -237,18 +237,11 @@ int numPelis(){
 		sqlite3_stmt *stmt;
 		int result;
 		sqlite3_open("BaseDeDatos", &db);
-//		int dispo=1;
-
-		////////////////////////
 		int numPelis = 0;
-
-		////////////////////////
 
 		char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula;";
 
 		sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
-//		sqlite3_bind_int(stmt, 1, dispo);
-
 		printf("\n");
 		do {
 			result = sqlite3_step(stmt) ;
@@ -256,7 +249,6 @@ int numPelis(){
 			numPelis++;
 			}
 		} while (result == SQLITE_ROW);
-	//	return arrayP;
 		sqlite3_finalize(stmt);
 		return numPelis;
 		sqlite3_close(db);
@@ -269,20 +261,14 @@ Pelicula* arrayPeliculas(int numPelis){
 	sqlite3_stmt *stmt;
 	int result;
 	sqlite3_open("BaseDeDatos", &db);
-//	int dispo=1;
-
-	////////////////////////
 	int numPelis2=0;
 	Pelicula *arrayP;
 	arrayP = (Pelicula*)(malloc(sizeof(Pelicula)*numPelis));
 
-	////////////////////////
 
 	char sql2[] = "select cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula;";
 
 	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
-//	sqlite3_bind_int(stmt, 1, dispo);
-
 	printf("\n");
 	//printf("Mostrando pel�culas disponibles:\n"); //te muestra el codigo
 	do {
@@ -323,11 +309,7 @@ int numUsuario(){
 		int result;
 		sqlite3_open("BaseDeDatos", &db);
 
-		////////////////////////
 		int numUsuario = 0;
-
-		////////////////////////
-
 		char sql2[] = "select * from usuario;";
 
 		sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
@@ -339,7 +321,6 @@ int numUsuario(){
 			numUsuario++;
 			}
 		} while (result == SQLITE_ROW);
-	//	return arrayP;
 		sqlite3_finalize(stmt);
 		return numUsuario;
 		sqlite3_close(db);
@@ -351,19 +332,13 @@ Usuario* arrayUsuarios(int numUsuario){
 	sqlite3_stmt *stmt;
 	int result;
 	sqlite3_open("BaseDeDatos", &db);
-//	int dispo=1;
-
-	////////////////////////
 	int numU=0;
 	Usuario *arrayU;
 	arrayU = (Usuario*)(malloc(sizeof(Usuario)*numUsuario));
 
-	////////////////////////
-
 	char sql2[] = "select * from usuario;";
 
 	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
-//	sqlite3_bind_int(stmt, 1, dispo);
 
 	printf("\n");
 	//printf("Mostrando pel�culas disponibles:\n"); //te muestra el codigo
@@ -523,7 +498,7 @@ Pelicula devolverAlquiler(Usuario u){
 			peli.genero = sqlite3_column_int(stmt, 4);
 			peli.valoracion = sqlite3_column_double(stmt, 5);
 			peli.disponibilidad = sqlite3_column_int(stmt, 3);
-			peli.minutos = sqlite3_column_int(stmt, 4);
+			peli.minutos = sqlite3_column_int(stmt, 6);
 
 		}
 	} while (result == SQLITE_ROW);
