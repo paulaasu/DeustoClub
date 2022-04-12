@@ -24,9 +24,4 @@ void editarPelicula(Pelicula *p, int cod, char* nom, float prec, int gen, float 
 void alquilarPelicula(Pelicula *p);
 void devolverPelicula(Pelicula *p);
 
-void sumaGastado(Usuario *u, Pelicula p);
-void cambiarDisponibilidad0(Pelicula *p);
-void cambiarDisponibilidad1(Pelicula *p);
-
-
 #endif /* PELICULA_H_ */

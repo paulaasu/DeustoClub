@@ -25,14 +25,3 @@ void devolverPelicula(Pelicula *p){
 	p->disponibilidad = 1;
 }
 
-//se cambia el gastado del usuario
-void sumaGastado(Usuario *u, Pelicula p){
-	u->gastado =+ p.precio;
-}
-
-void cambiarDisponibilidad0(Pelicula *p){
-	p->disponibilidad=0;
-}
-void cambiarDisponibilidad1(Pelicula *p){
-	p->disponibilidad=1;
-}

@@ -150,11 +150,6 @@ Usuario registrarUsuario(){
 		if (correcta == 1) {
 			u.contrasenia = contrasenia;
 		}
-
-		printf("Usuario registrado correctamente!\n");
-
-
-
 		return u;
 }
 
