@@ -25,6 +25,8 @@ Usuario* arrayUsuarios(int numUsuario);
 void eliminarAlq(Usuario u);
 int buscarMaxCodPel();
 
+void eliminarPelicula(int cod_p);
+
 
 int comprobarAlquiler(Usuario u);
 Pelicula devolverAlquiler(Usuario u);

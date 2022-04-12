@@ -67,7 +67,7 @@ void anyadirPelicula(Pelicula p){
 
 }
 
-void eliminarPelicula(Pelicula p){
+void eliminarPelicula(int cod_p){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 	int result;
@@ -78,7 +78,7 @@ void eliminarPelicula(Pelicula p){
 
 
 	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL) ;
-	sqlite3_bind_int(stmt, 1, p.codPelicula);
+	sqlite3_bind_int(stmt, 1, cod_p);
 
 
 	result = sqlite3_step(stmt);

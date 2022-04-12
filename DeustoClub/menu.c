@@ -369,9 +369,9 @@ void mostrarMenuAdmin(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
-		a.ArrayP = arrayPeliculas(numPelis);
-		eliminarPelicula(eliminarPeli(a));
-		a.ArrayP = arrayPeliculas(numPelis);
+//		a.ArrayP = arrayPeliculas(numPelis);
+		eliminarPelicula(preguntarEliminarPeli());
+		//a.ArrayP = arrayPeliculas(numPelis);
 }
 	if (c == '3') {
 		fflush(stdin);
@@ -457,23 +457,17 @@ Pelicula anyadirPeli(){
 		return peli;
 }
 
-Pelicula eliminarPeli(Almacen a){
+int preguntarEliminarPeli(){
 	visualizarPeliculasDisp();
 	char str[MAX_LINE];
-	Pelicula peli;
+	int codP;
 
-	int cod_p;
-	printf("Introduce el codigo de la pelicula que deseas eliminar:\n");
+	printf("Introduce el código de película que quieres eliminar:\n");
 	fflush(stdout);
 	fgets(str, MAX_LINE, stdin);
-	sscanf(str, "%i", &cod_p);
-	fflush(stdin);
-	for (int var = 0; var < a.numPeliculas; ++var) {
-		if (a.ArrayP[var].codPelicula==cod_p) {
-			peli = a.ArrayP[var];
-		}
-	}
-return peli;
+	sscanf(str, "%i", &codP);
+
+	return codP;
 }
 void escFich(){
 		FILE* f;
@@ -484,7 +478,7 @@ void escFich(){
 		fprintf(f, "Gastos por usuario \n");
 		fprintf(f, "-------------- \n");
 		for (int var = 0; var < numUsuario() ; ++var) {
-			fprintf(f, "%s-----%f\n", au[var].nombre, au[var].gastado);
+			fprintf(f, "%s.........%f\n", au[var].nombre, au[var].gastado);
 
 		}
 		printf("Datos guardados correctamente\n");
