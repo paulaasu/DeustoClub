@@ -51,7 +51,7 @@ void anyadirPelicula(Pelicula p){
 	sqlite3_bind_double(stmt, 3, p.precio);
 	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la película
 	sqlite3_bind_int(stmt, 5, p.genero);
-	sqlite3_bind_int(stmt, 6, p.valoracion);
+	sqlite3_bind_double(stmt, 6, p.valoracion);
 	sqlite3_bind_int(stmt, 7, p.minutos);
 
 

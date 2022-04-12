@@ -329,6 +329,7 @@ void mostrarMenuAdmin(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
+		a.ArrayP = arrayPeliculas(numPelis);
 		eliminarPelicula(eliminarPeli(a));
 		a.ArrayP = arrayPeliculas(numPelis);
 }
@@ -370,7 +371,6 @@ Pelicula anyadirPeli(){
 
 		peli.nombre = (char*)(malloc(sizeof(char)*(tamanyo+1)));
 		strcpy(peli.nombre, formato1);
-		printf("%s", peli.nombre);
 		free(formato1);
 
 		float precio;
@@ -421,6 +421,7 @@ Pelicula eliminarPeli(Almacen a){
 	visualizarPeliculasDisp();
 	char str[MAX_LINE];
 	Pelicula peli;
+
 
 	int cod_p;
 	printf("Introduce el codigo de la pelicula que deseas eliminar:\n");
