@@ -15,6 +15,8 @@
 #include "almacen.h"
 #include "bd.h"
 
+
+
 int comprobarcontrasenya(char* c1, char* c2){
 	int correcto = 1;
 	if (strcmp(c1, c2)) {
@@ -172,11 +174,47 @@ void menuPrincipal(Almacen a, Usuario u){
 
 	if (c == '2') {
 		fflush(stdin);
-		visualizarPeliculasDisp();
-		int cod_p = introducirPeliAlq();
-		alqPelicula(u, cod_p);
+		int estaEnLista = comprobarAlquiler(u);
+		if(estaEnLista==0){
+			visualizarPeliculasDisp();
+			int cod_p = introducirPeliAlq();
+			alqPelicula(u, cod_p);
+			float precio;
+			for(int i=0;i<a.numPeliculas;i++){
+				if(a.ArrayP[i].codPelicula==cod_p){
+					precio = a.ArrayP[i].precio;
+				}
+			}
+			precio += u.gastado;
+			cambiarGastado(u, precio);
+			cambiaDisponibilidad(cod_p, 0);
+		}else{
+			printf("¡Tienes una película pendiente de devolver!\n");
+		}
+
+
 
 	}
+
+	if (c == '3') {
+			fflush(stdin);
+			Pelicula p;
+			p = devolverAlquiler(u);
+
+			printf("¿Quieres devolver %s?(y/n)\n", p.nombre);
+
+			char c;
+			fflush(stdout);
+			c = getchar();
+			if (c == 'y'|| c=='Y') {
+					fflush(stdin);
+					eliminarAlq(u);
+					cambiaDisponibilidad(p.codPelicula, 1);
+
+			}
+
+		}
+
 	if (c == '4') {
 		fflush(stdin);
 		mostrarMenuFiltro(a);
@@ -331,6 +369,7 @@ void mostrarMenuAdmin(Almacen a){
 
 	if (c == '2') {
 		fflush(stdin);
+		a.ArrayP = arrayPeliculas(numPelis);
 		eliminarPelicula(eliminarPeli(a));
 		a.ArrayP = arrayPeliculas(numPelis);
 }
@@ -372,7 +411,6 @@ Pelicula anyadirPeli(){
 
 		peli.nombre = (char*)(malloc(sizeof(char)*(tamanyo+1)));
 		strcpy(peli.nombre, formato1);
-		printf("%s", peli.nombre);
 		free(formato1);
 
 		float precio;

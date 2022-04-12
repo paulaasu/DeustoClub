@@ -22,8 +22,14 @@ void verMisPelis(Usuario u);
 void cambiarGastado(Usuario u, float cantidad);
 int numUsuario();
 Usuario* arrayUsuarios(int numUsuario);
-void eliminarAlq(Usuario u, Pelicula p);
+void eliminarAlq(Usuario u);
 int buscarMaxCodPel();
+
+
+int comprobarAlquiler(Usuario u);
+Pelicula devolverAlquiler(Usuario u);
+void cambiaDisponibilidad(int codPeli, int dispo);
+void cambiarGastado(Usuario u, float cantidad);
 
 
 #endif /* BD_H_ */

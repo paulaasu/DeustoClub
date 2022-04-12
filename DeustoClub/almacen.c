@@ -56,7 +56,7 @@ void filtrarGenero(Almacen a, int genero){
 }
 
 void filtrarPrecioMax(Almacen a, int precio){
-	printf("PELICULAS A MENOS DE %i€\n", precio);
+	printf("PELICULAS A MENOS DE %iâ‚¬\n", precio);
 		printf("------------------\n");
 		for (int var = 0; var < a.numPeliculas; ++var) {
 			if (a.ArrayP[var].precio <= precio) {

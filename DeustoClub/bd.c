@@ -49,7 +49,7 @@ void anyadirPelicula(Pelicula p){
 	sqlite3_bind_int(stmt, 1, p.codPelicula);
 	sqlite3_bind_text(stmt, 2, p.nombre, strlen(p.nombre), SQLITE_STATIC);
 	sqlite3_bind_double(stmt, 3, p.precio);
-	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la pelÌcula
+	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la pelÔøΩcula
 	sqlite3_bind_int(stmt, 5, p.genero);
 	sqlite3_bind_int(stmt, 6, p.valoracion);
 	sqlite3_bind_int(stmt, 7, p.minutos);
@@ -57,9 +57,9 @@ void anyadirPelicula(Pelicula p){
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error al aÒadir la pelicula!\n");
+		printf("Error al a√±adir la pelicula!\n");
 	}else{
-		printf("Pelicula aÒadida correctamente\n");
+		printf("Pelicula a√±adida correctamente\n");
 	}
 
 	sqlite3_finalize(stmt);
@@ -83,9 +83,9 @@ void eliminarPelicula(Pelicula p){
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error eliminando la pelÌcula!\n");
+		printf("Error eliminando la pel√≠cula!\n");
 	}else{
-		printf("PelÌcula eliminada correctamente \n");
+		printf("Pel√≠cula eliminada correctamente \n");
 	}
 
 	sqlite3_finalize(stmt);
@@ -109,7 +109,7 @@ void updatePelicula(Pelicula p){
 	sqlite3_bind_int(stmt, 1, p.codPelicula);
 	sqlite3_bind_text(stmt, 2, p.nombre, strlen(p.nombre), SQLITE_STATIC);
 	sqlite3_bind_double(stmt, 3, p.precio);
-	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la pelÌcula
+	sqlite3_bind_int(stmt, 4, 1); //porque al insertar si o si tiene que estar disponible la pelÔøΩcula
 	sqlite3_bind_int(stmt, 5, p.genero);
 	sqlite3_bind_int(stmt, 6, p.valoracion);
 	sqlite3_bind_int(stmt, 7, p.minutos);
@@ -140,7 +140,7 @@ void visualizarPeliculasDisp(){
 	sqlite3_bind_int(stmt, 1, dispo);
 
 	printf("\n");
-	printf("Mostrando pelÌculas disponibles:\n"); //te muestra el codigo
+	printf("Mostrando pel√≠culas disponibles:\n"); //te muestra el codigo
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
@@ -154,7 +154,7 @@ void visualizarPeliculasDisp(){
 	sqlite3_close(db);
 
 }
-//comprueba si el usuario y contraseÒa est·n en la bd y si est· te devuelve un 1
+//comprueba si el usuario y contraseÔøΩa estÔøΩn en la bd y si estÔøΩ te devuelve un 1
 int comprobarUsuario(char *u, char *c){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
@@ -206,7 +206,7 @@ int buscarMaxCodPel(){
 }
 
 
-//aÒade a la tabla alquilar el usuario y pelicula y el codigo alquiler
+//aÔøΩade a la tabla alquilar el usuario y pelicula y el codigo alquiler
 void alqPelicula(Usuario u, int cod_p){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
@@ -222,9 +222,9 @@ void alqPelicula(Usuario u, int cod_p){
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error al alquilar la pelÌcula!\n");
+		printf("Error al alquilar la pel√≠cula!\n");
 	}else{
-		printf("PelÌcula alquilada correctamente\n");
+		printf("Pel√≠cula alquilada correctamente\n");
 	}
 
 	sqlite3_finalize(stmt);
@@ -284,7 +284,7 @@ Pelicula* arrayPeliculas(int numPelis){
 //	sqlite3_bind_int(stmt, 1, dispo);
 
 	printf("\n");
-	//printf("Mostrando pelÌculas disponibles:\n"); //te muestra el codigo
+	//printf("Mostrando pelÔøΩculas disponibles:\n"); //te muestra el codigo
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
@@ -366,7 +366,7 @@ Usuario* arrayUsuarios(int numUsuario){
 //	sqlite3_bind_int(stmt, 1, dispo);
 
 	printf("\n");
-	//printf("Mostrando pelÌculas disponibles:\n"); //te muestra el codigo
+	//printf("Mostrando pelÔøΩculas disponibles:\n"); //te muestra el codigo
 	do {
 		result = sqlite3_step(stmt) ;
 		if (result == SQLITE_ROW) {
@@ -393,25 +393,24 @@ Usuario* arrayUsuarios(int numUsuario){
 
 }
 
-void eliminarAlq(Usuario u, Pelicula p){
+void eliminarAlq(Usuario u){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 	int result;
 
 	sqlite3_open("BaseDeDatos", &db);
 	/* --- INSERT --- */
-	char sql1[] = "delete from alquiler where pelicula = ? and usuario = ?";
+	char sql1[] = "delete from alquiler where usuario = ?";
 
 	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL) ;
 	sqlite3_bind_text(stmt, 1, u.nombre, strlen(u.nombre), SQLITE_STATIC);
-	sqlite3_bind_text(stmt, 2, u.contrasenia, strlen(u.contrasenia), SQLITE_STATIC);
 
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error eliminando el alquiler!\n");
+		printf("¬°Error en la devoluci√≥n de la pel√≠cula!\n");
 	}else{
-		printf("Alquiler eliminado correctamente\n");
+		printf("Pel√≠cula devuelta correctamente\n");
 	}
 
 	sqlite3_finalize(stmt);
@@ -421,39 +420,11 @@ void eliminarAlq(Usuario u, Pelicula p){
 }
 
 
-//void verMisPelis(Usuario u){
-//	sqlite3 *db;
-//	sqlite3_stmt *stmt;
-//	int result;
-//	sqlite3_open("BaseDeDatos", &db);
-//
-//	char sql2[] = "select cod_p, pelicula.nombre, precio, disponibilidad, generos.nombre, valoracion, minutos from pelicula, generos, alquiler, usuario where pelicula.genero=generos.cod and usuario.usuario = alquiler.usuario and alquiler.cod_pelicula=pelicula.cod_p and usuario=?;";
-//
-//	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
-//	sqlite3_bind_text(stmt, 1, u.nombre, strlen(u.nombre), SQLITE_STATIC);
-//
-//
-//	printf("\n");
-//	printf("Mostrando tus pelÌculas:\n"); //te muestra el codigo
-//	do {
-//		result = sqlite3_step(stmt) ;
-//		if (result == SQLITE_ROW) {
-//			printf("[Cod: %s, Nombre: %i, Precio: %s, Genero: %s, Valoracion: %s, Minutos: %s]\n",sqlite3_column_text(stmt, 0) , sqlite3_column_text(stmt, 1), sqlite3_column_text(stmt, 2), sqlite3_column_text(stmt, 4), sqlite3_column_text(stmt, 5), sqlite3_column_text(stmt, 6));
-//		}
-//	} while (result == SQLITE_ROW);
-//	printf("\n");
-//	sqlite3_finalize(stmt);
-//
-//	sqlite3_close(db);
-//
-//}
-
-//hace que la disponibilidad se cambie a 0, es decir, no estÈ disponible EST¡ MAL
+//hace que la disponibilidad se cambie a 0, es decir, no estÔøΩ disponible ESTÔøΩ MAL
 void cambiarGastado(Usuario u, float cantidad){
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 	int result;
-	printf("Cantidad2: %f", cantidad);
 	sqlite3_open("BaseDeDatos", &db);
 
 	char sql1[] = "update usuario set gastado=?  where usuario= ? ;";
@@ -473,3 +444,94 @@ void cambiarGastado(Usuario u, float cantidad){
 	sqlite3_finalize(stmt);
 
 }
+
+
+//hace que la disponibilidad se cambie a 0, es decir, no est√© disponible EST√Å MAL
+void cambiaDisponibilidad(int codPeli, int dispo){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;;
+	sqlite3_open("BaseDeDatos", &db);
+
+	char sql1[] = "update pelicula set disponibilidad=? where cod_p = ?;";
+
+	sqlite3_prepare_v2(db, sql1, strlen(sql1) + 1, &stmt, NULL) ;
+	sqlite3_bind_int(stmt, 1, dispo);
+	sqlite3_bind_int(stmt, 2, codPeli);
+
+
+
+	result = sqlite3_step(stmt);
+//	if (result != SQLITE_DONE) {
+//		printf("Error en el cambio de disponibilidad a 0!\n");
+//	}else{
+//		printf("Disponibilidad a 0 cambiada correctamente\n");
+//	}
+
+	sqlite3_finalize(stmt);
+
+}
+
+
+int comprobarAlquiler(Usuario u){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	sqlite3_open("BaseDeDatos", &db);
+	int comprobar=0;
+
+	char sql2[] = "select * from alquiler where usuario=?;";
+
+	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
+	sqlite3_bind_text(stmt, 1, u.nombre, strlen(u.nombre), SQLITE_STATIC);
+
+
+	result = sqlite3_step(stmt);
+	if(result == SQLITE_ROW){
+		comprobar=1;
+	}
+	sqlite3_finalize(stmt);
+
+	sqlite3_close(db);
+	return comprobar;
+
+}
+
+Pelicula devolverAlquiler(Usuario u){
+	sqlite3 *db;
+	sqlite3_stmt *stmt;
+	int result;
+	sqlite3_open("BaseDeDatos", &db);
+
+	char sql2[] = "select p.cod_p, nombre, precio, disponibilidad, genero, valoracion, minutos from pelicula p, usuario u, alquiler a where p.cod_p=a.cod_p and a.usuario=u.usuario and u.usuario=?;;";
+
+	sqlite3_prepare_v2(db, sql2, strlen(sql2), &stmt, NULL) ;
+	sqlite3_bind_text(stmt, 1, u.nombre, strlen(u.nombre), SQLITE_STATIC);
+
+	Pelicula peli;
+	printf("\n");
+	//printf("Mostrando pelÔøΩculas disponibles:\n"); //te muestra el codigo
+	do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			peli.nombre = (char*)(malloc(sizeof(char)* strlen(sqlite3_column_text(stmt, 1))));
+		//	peli.nombre = (char*)sqlite3_column_text(stmt, 1);
+			strcpy(peli.nombre, (char*)sqlite3_column_text(stmt, 1));
+
+			peli.codPelicula = sqlite3_column_int(stmt, 0);
+			peli.precio = sqlite3_column_double(stmt, 2);
+			peli.genero = sqlite3_column_int(stmt, 4);
+			peli.valoracion = sqlite3_column_double(stmt, 5);
+			peli.disponibilidad = sqlite3_column_int(stmt, 3);
+			peli.minutos = sqlite3_column_int(stmt, 4);
+
+		}
+	} while (result == SQLITE_ROW);
+
+	sqlite3_finalize(stmt);
+
+	return peli;
+	sqlite3_close(db);
+
+}
+
