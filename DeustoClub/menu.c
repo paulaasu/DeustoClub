@@ -322,12 +322,15 @@ void mostrarMenuAdmin(Almacen a){
 
 	if (c == '1') {
 		fflush(stdin);
+
 		anyadirPelicula(anyadirPeli());
+		a.ArrayP = arrayPeliculas(numPelis);
 }
 
 	if (c == '2') {
 		fflush(stdin);
 		eliminarPelicula(eliminarPeli(a));
+		a.ArrayP = arrayPeliculas(numPelis);
 }
 	if (c == '3') {
 		fflush(stdin);
@@ -358,14 +361,16 @@ Pelicula anyadirPeli(){
 		peli.codPelicula = cod;
 
 		char *formato1 = (char*)(malloc(sizeof(char*)*(MAX_LINE)));
-		printf("Nombre película:\n");
+		printf("Nombre película usando _ en lugar de espacios:\n");
 		fflush(stdout);
 		fgets(str, MAX_LINE, stdin);
 		sscanf(str, "%s", formato1);
 		fflush(stdin);
 		int tamanyo = strlen(formato1);
-		peli.nombre = (char*)(malloc(sizeof(char*)*(tamanyo+1)));
+
+		peli.nombre = (char*)(malloc(sizeof(char)*(tamanyo+1)));
 		strcpy(peli.nombre, formato1);
+		printf("%s", peli.nombre);
 		free(formato1);
 
 		float precio;
@@ -413,6 +418,7 @@ Pelicula anyadirPeli(){
 }
 
 Pelicula eliminarPeli(Almacen a){
+	visualizarPeliculasDisp();
 	char str[MAX_LINE];
 	Pelicula peli;
 
@@ -439,6 +445,7 @@ void escFich(){
 		fprintf(f, "-------------- \n");
 		for (int var = 0; var < numUsuario() ; ++var) {
 			fprintf(f, "%s-----%f\n", au[var].nombre, au[var].gastado);
+
 		}
 		printf("Datos guardados correctamente\n");
 		fclose(f);
